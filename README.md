@@ -1,54 +1,69 @@
+# README
+
 # テーブル設計
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           |string  | null: false |
-| email              |string  | null: false |
-| encrypted_password |string  | null: false |
-| first_name         |string  | null: false |
-| last_name          |string  | null: false |
-| birthday           |integer | null: false |
-| card_number        |integer | null: false |
-| deadline           |integer | null: false |
-| code               |integer | null: false |
-| postalcode         |integer | null: false |
-| prefectures        |string  | null: false |
-| municipaldistrict  |string  | null: false |
-| district           |string  | null: false |
-| building           |string  |             |
-| phone              |integer | null: false |
+| Column             | Type       | Options                         |
+| ------------------ | ---------- | --------------------------------|
+| nickname           |string      | null: false                     |
+| email              |string      | null: false, unique: true       |
+| encrypted_password |string      | null: false                     |
+| first_name         |string      | null: false                     |
+| last_name          |string      | null: false                     |
+| first_name_yomi    |string      | null: false                     |
+| last_name_yomi     |string      | null: false                     |
+| birthday           |date        | null: false                     |
 
 ### Association
 
 - has_many :items
-- has_many :comments
+- has_many :historys
 
 ## items テーブル
 
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
-| name       | string     | null: false                     |
+| item_name  | string     | null: false                     |
 | explain    | text       | null: false                     |
-| category   | string     | null: false                     |
-| status     | string     | null: false                     |
-| postage    | integer    | null: false                     |
-| area       | string     | null: false                     |
-| days       | integer    | null: false                     |
+| category_id| integer    | null: false                     |
+| status_id  | integer    | null: false                     |
+| postage_id | integer    | null: false                     |
+| area_id    | integer    | null: false                     |
+| send_day_id| integer    | null: false                     |
 | price      | integer    | null: false                     |
 | user       | references | null: false, foreign_key: true  |
 
+### Association
+
+- belongs_to :user
+- has_one :history
+
+## destinations テーブル
+
+| Column             | Type       | Options                         |
+| ------------------ | ---------- | --------------------------------|
+| postalcode         |string      | null: false                     |
+| area_id            |integer     | null: false                     |
+| municipaldistrict  |string      | null: false                     |
+| district           |string      | null: false                     |
+| building           |string      |                                 |
+| phone              |string      | null: false                     |
+| history            |references  | null: false, foreign_key: true  |
 
 ### Association
 
-- has_many :comments
+- belongs_to :history
 
-## comments テーブル
+## historys テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| content   | text       | null: false                    |
-| items     | references | null: false, foreign_key: true |
-| user      | references | null: false, foreign_key: true |
+| Column             | Type        | Options                         |
+| ------------------ | ----------- | ------------------------------- |
+| user               | references  | null: false, foreign_key: true  |
+| item               | references  | null: false, foreign_key: true  |
 
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :destination
