@@ -4,62 +4,74 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           |string  | null: false |
-| email              |string  | null: false |
-| encrypted_password |string  | null: false |
-| first_name         |string  | null: false |
-| last_name          |string  | null: false |
-| birthday           |integer | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | --------------------------|
+| nickname           |string  | null: false               |
+| email              |string  | null: false, unique: true |
+| encrypted_password |string  | null: false               |
+| first_name         |string  | null: false               |
+| last_name          |string  | null: false               |
+| first_name_yomi    |string  | null: false               |
+| last_name_yomi     |string  | null: false               |
+| birthday           |integer | null: false               |
 
 ### Association
 
-- has_many :items
-- has_many :buys
-- has_one :cards
+- belongs_to :items
+- belongs_to :destinations
+- belongs_to :historys
 
 ## items テーブル
 
 | Column     | Type       | Options                         |
 | ---------- | ---------- | ------------------------------- |
-| name       | string     | null: false                     |
+| item_name  | string     | null: false                     |
 | explain    | text       | null: false                     |
 | category   | string     | null: false                     |
 | status     | string     | null: false                     |
-| postage    | integer    | null: false                     |
-| area       | string     | null: false                     |
-| days       | integer    | null: false                     |
+| postage_id | integer    | null: false                     |
+| area_id    | integer    | null: false                     |
+| send_day   | integer    | null: false                     |
 | price      | integer    | null: false                     |
+| user       | references | null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :users
-- has_one :buys
+- has_one :user
+- belongs_to :history
 
-## buys テーブル
+## destinations テーブル
 
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | --------------------------------|
-| postalcode         |integer     | null: false                     |
-| prefectures        |string      | null: false                     |
+| postalcode         |string      | null: false                     |
+| prefectures_id     |string      | null: false                     |
 | municipaldistrict  |string      | null: false                     |
 | district           |string      | null: false                     |
 | building           |string      |                                 |
-| phone              |integer     | null: false                     |
+| phone              |string      | null: false                     |
+| history            |references  | null: false, foreign_key: true  |
 
 ### Association
 
 - has_many :users
-- has_one :cards
+- belongs_to :historys
 
-## cards テーブル
+## historys テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| card_number        |integer | null: false |
-| deadline           |integer | null: false |
-| code               |integer | null: false |
+| Column             | Type        | Options                         |
+| ------------------ | ----------- | ------------------------------- |
+| item_name          | string      | null: false                     |
+| user               | references  | null: false, foreign_key: true  |
+| destination        | references  | null: false, foreign_key: true  |
 
-- belongs_to :users
-- belongs_to :buys
+### Association
+
+- has_many :users
+- belongs_to :historys
+
+- has_one :item
+- belongs_to :history
+
+- has_one :destination
+- belongs_to :history
