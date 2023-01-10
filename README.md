@@ -53,7 +53,6 @@
 
 ### Association
 
-- has_many :users
 - belongs_to :history
 
 ## historys テーブル
