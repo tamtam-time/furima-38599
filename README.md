@@ -13,13 +13,12 @@
 | last_name          |string      | null: false                     |
 | first_name_yomi    |string      | null: false                     |
 | last_name_yomi     |string      | null: false                     |
-| birthday           |integer     | null: false                     |
-| history            |references  | null: false, foreign_key: true  |
+| birthday           |date        | null: false                     |
 
 ### Association
 
 - has_many :items
-- belongs_to :historys
+- has_many :historys
 
 ## items テーブル
 
@@ -45,7 +44,7 @@
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | --------------------------------|
 | postalcode         |string      | null: false                     |
-| prefectures_id     |integer     | null: false                     |
+| area_id            |integer     | null: false                     |
 | municipaldistrict  |string      | null: false                     |
 | district           |string      | null: false                     |
 | building           |string      |                                 |
@@ -66,6 +65,6 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - belongs_to :item
 - has_one :destination
