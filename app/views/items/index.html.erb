@@ -112,16 +112,14 @@
     </ul>
   </div>
 
-  <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', new_item_path , class: "subtitle" %>
     <ul class='item-lists'>
 
-      <%# 商品データがある場合は、eachメソッドで一覧表示する %>
     <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item) do %>
         <div class='item-img-content'>
         <%= image_tag item.image, class: "item-img" if item.image.attached? %>
 
@@ -142,7 +140,6 @@
       </li>
       <% end %>
 
-  <%# 商品がない場合はダミーを表示する %>
     <% if @items.blank? then %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -161,7 +158,6 @@
     <% end %>
     </ul>
   </div>
-  <%# /商品一覧 %>
 </div>
 <%= link_to new_item_path, method: :get, class: 'purchase-btn' do %>
   <span class='purchase-btn-text'>出品する</span>
