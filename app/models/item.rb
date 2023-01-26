@@ -2,12 +2,14 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
+  #has_one    :order
+
 
   belongs_to :category
   belongs_to :status
   belongs_to :postage
-  belongs_to :sendday
   belongs_to :area
+  belongs_to :send_day
 
   has_one_attached :image
 
