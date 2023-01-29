@@ -10,7 +10,7 @@
       validates :area_id, numericality: { other_than: 0, message: "can't be blank" }
       validates :municipaldistrict
       validates :district
-      validates :phone, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
+      validates :phone, length: {minimum: 10, maximum: 11}, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
   
     end
   
