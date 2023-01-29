@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_top
-    if @item.user_id == current_user.id #&& @item.order.nil?
+    if @item.user_id == current_user.id && @item.history.nil?
     else
       redirect_to root_path
     end

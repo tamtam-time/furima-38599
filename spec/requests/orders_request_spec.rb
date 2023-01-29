@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "Orders", type: :request do
+RSpec.describe "Histories", type: :request do
 
 end
