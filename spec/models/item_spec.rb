@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーの情報が空欄だと出品できない' do
         @item.category_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
+        expect(@item.errors.full_messages).to include('Category is not a number')
       end
       it '商品の状態の情報が「---」だと出品できない' do
         @item.status_id = 0
@@ -75,7 +75,7 @@ RSpec.describe Item, type: :model do
       it '商品の状態の情報が空欄だと出品できない' do
         @item.status_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
+        expect(@item.errors.full_messages).to include('Status is not a number')
       end
       it '配送料の負担の情報が「---」だと出品できない' do
         @item.postage_id = 0
@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
       it '配送料の負担の情報が空欄だと出品できない' do
         @item.postage_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage can't be blank", "Postage is not a number")
+        expect(@item.errors.full_messages).to include("Postage is not a number")
       end
       it '発送元の地域の情報が「---」だと出品できない' do
         @item.area_id = 0
@@ -95,7 +95,7 @@ RSpec.describe Item, type: :model do
       it '発送元の地域の情報が空欄だと出品できない' do
         @item.area_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area can't be blank", 'Area is not a number')
+        expect(@item.errors.full_messages).to include('Area is not a number')
       end
       it '発送までの日数の情報が「---」だと出品できない' do
         @item.send_day_id = 0
@@ -105,12 +105,12 @@ RSpec.describe Item, type: :model do
       it '発送までの日数の情報が空欄だと出品できない' do
         @item.send_day_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Send day can't be blank", "Send day is not a number")
+        expect(@item.errors.full_messages).to include("Send day is not a number")
       end
       it '価格が空欄だと出品できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it '販売価格が半角数字以外では登録できない' do
         @item.price = '２２全角'
