@@ -70,15 +70,6 @@ ActiveRecord::Schema.define(version: 2023_01_27_071054) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "item_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_orders_on_item_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -102,6 +93,4 @@ ActiveRecord::Schema.define(version: 2023_01_27_071054) do
   add_foreign_key "histories", "items"
   add_foreign_key "histories", "users"
   add_foreign_key "items", "users"
-  add_foreign_key "orders", "items"
-  add_foreign_key "orders", "users"
 end
